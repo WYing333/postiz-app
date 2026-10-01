@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 
-export function Tool(params: {
+export function AgentTool(params: {
   description: string;
   dataSchema: Array<{ key: string; type: string; description: string }>;
 }) {
