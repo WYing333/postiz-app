@@ -38,6 +38,9 @@ const SUBJECTS: Record<string, string> = {
 
 function hexToRgb(hex: string): [number, number, number] {
   const n = parseInt(hex.slice(1), 16);
+  if (Number.isNaN(n)) {
+    return [0, 0, 0];
+  }
   return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
 }
 
