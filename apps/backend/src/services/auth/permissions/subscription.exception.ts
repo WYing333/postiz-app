@@ -5,6 +5,7 @@ import {
   HttpException,
 } from '@nestjs/common';
 import { AuthorizationActions, Sections, SubscriptionException } from '@gitroom/backend/services/auth/permissions/permission.exception.class';
+import { PostComment } from '@gitroom/frontend/components/new-launch/providers/post-comment.enum';
 
 @Catch(SubscriptionException)
 export class SubscriptionExceptionFilter implements ExceptionFilter {
@@ -21,6 +22,10 @@ export class SubscriptionExceptionFilter implements ExceptionFilter {
       statusCode: status,
       message,
       url: process.env.FRONTEND_URL + '/billing',
+      blocked:
+        error.section === Sections.POSTS_PER_MONTH
+          ? PostComment[PostComment.ALL]
+          : undefined,
     });
   }
 }
