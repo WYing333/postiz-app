@@ -66,9 +66,10 @@ const ssrfSafeAxios = axios.create({
 // Setting DISABLE_SSRF_PROTECTION=true opts those deployments out of the IP
 // guard. It stays ON by default so the hosted product is protected.
 export function getSsrfSafeDispatcher(): Agent | undefined {
-  return process.env.DISABLE_SSRF_PROTECTION === 'true'
-    ? undefined
-    : ssrfSafeDispatcher;
+  if (process.env.DISABLE_SSRF_PROTECTION === 'true') {
+    return undefined;
+  }
+  return ssrfSafeDispatcher;
 }
 
 export function getSsrfSafeAxios(): AxiosInstance {
